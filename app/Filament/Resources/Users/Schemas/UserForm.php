@@ -21,14 +21,25 @@ class UserForm
                         TextInput::make('name')
                             ->prefixIcon('heroicon-o-user')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->placeholder('Enter full name'),
+
+                        Select::make('role')
+                            ->prefixIcon('heroicon-o-shield-check')
+                            ->required()
+                            ->options([
+                                'head' => 'Registrar Head',
+                                'officer' => 'Registrar Officer',
+                            ])
+                            ->placeholder('Select role'),
 
                         TextInput::make('email')
                             ->prefixIcon('heroicon-o-envelope')
                             ->email()
                             ->required()
                             ->maxLength(255)
-                            ->unique(ignoreRecord: true),
+                            ->unique(ignoreRecord: true)
+                            ->placeholder('Enter email address'),
 
                         TextInput::make('phone')
                             ->prefixIcon('heroicon-o-phone')
@@ -45,16 +56,8 @@ class UserForm
                             ->dehydrated(fn ($state) => filled($state))
                             ->hiddenOn('view')
                             ->revealable(),
-
-                        Select::make('role')
-                            ->prefixIcon('heroicon-o-shield-check')
-                            ->options([
-                                'head' => 'Registrar Head',
-                                'officer' => 'Registrar Officer',
-                            ])
-                            ->required()
-                            ->default('officer'),
-                    ]),
+                    ])
+                    ->columns(2),
             ]);
     }
 }

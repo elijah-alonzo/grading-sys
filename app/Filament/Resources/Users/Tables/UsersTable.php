@@ -38,6 +38,11 @@ class UsersTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('phone')
+                    ->label('Phone Number')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 //
