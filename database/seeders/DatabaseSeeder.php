@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminUserSeeder::class,
             DepartmentSeeder::class,
+            FacultySeeder::class,
+            SubjectSeeder::class,
+            SectionSeeder::class,
         ]);
     }
 }

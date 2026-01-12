@@ -30,6 +30,12 @@ class UserForm
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
 
+                        TextInput::make('phone')
+                            ->prefixIcon('heroicon-o-phone')
+                            ->tel()
+                            ->maxLength(255)
+                            ->placeholder('Enter phone number'),
+
                         TextInput::make('password')
                             ->prefixIcon('heroicon-o-lock-closed')
                             ->password()

@@ -1,95 +1,94 @@
-# Phase 1: Foundation Setup (MVP)
+# Phase 2: Core Academic Data Management (MVP)
 
 ## Phase Overview
-Phase 1 focuses on establishing the core foundation of the system. This phase includes user authentication, role-based access, and basic reference data. These features are simple to implement, have minimal dependencies, and are required for all succeeding phases.
+Phase 2 focuses on managing the institution’s core academic data. This phase introduces faculty and subject records, which are essential for assigning teaching loads, tracking grading sheet submissions, and enforcing compliance in later phases.
 
 ---
 
 ## Objectives
-- Enable secure system access
-- Define user roles and permissions
-- Establish base reference data for academic structure
-- Prepare the system for relational data in later phases
+- Store and manage faculty information
+- Maintain accurate subject and course records
+- Establish academic data required for assignment and tracking
+- Prepare relationships for grading sheet monitoring
 
 ---
 
 ## Included Resources
-- User Management
-- Department Management
+- Faculty Management
+- Subject Management
 
 ---
 
-## 1. User Management
+## 1. Faculty Management
 
 ### Descriptive Overview
-User Management allows the Registrar’s Office to control who can access the system and what actions they are allowed to perform. The Registrar Head has full administrative control, while Registrar Officers have limited access based on their role. This ensures security, accountability, and proper segregation of duties.
+Faculty Management maintains a centralized record of all teaching personnel. This module ensures that faculty members are properly categorized, assigned to departments, and available for subject assignment. Accurate faculty records are essential for reliable grading sheet tracking and compliance reporting.
 
 ### Technical Overview
-- Uses Laravel’s built-in authentication system
-- Role-based access control implemented via a `role` field in the `users` table
-- Only the Registrar Head can create, edit, or delete user accounts
-- Registrar Officers can only access assigned modules
-- Password hashing handled by Laravel
-- Filament `UserResource` used for CRUD operations
+- Implemented using a Filament `FacultyResource`
+- Faculty records are linked to departments via a foreign key
+- Employment type stored as an enumerated field
+- Supports full CRUD operations
 
 ### Key Data Fields
-- Name
-- Email
-- Password
-- Role (`head`, `officer`)
+- Full name
+- Employment type (Full-Time / Part-Time)
+- Department (foreign key reference)
+- Contact information
 
 ### Technical Notes
-- Authorization enforced using Filament policies or `canViewAny()` methods
-- Default Filament authentication guards are sufficient for MVP
-- Future-ready for expansion to role-permission packages if needed
+- Department selection implemented using a relationship dropdown
+- Enforce required fields for data integrity
+- Index `department_id` for faster filtering and queries
+- Future-ready for faculty status or rank expansion
 
 ---
 
-## 2. Department Management
+## 2. Subject Management
 
 ### Descriptive Overview
-Department Management centralizes academic departments within the institution. This ensures consistency in faculty assignment, simplifies filtering and reporting, and prevents data duplication. Departments serve as a foundational reference for faculty records.
+Subject Management handles all course-related data offered by the institution. It allows the Registrar to maintain accurate subject details such as schedules and room assignments, which are later used to associate faculty and track grading submissions.
 
 ### Technical Overview
-- Standalone CRUD module with no dependencies
-- Managed through a Filament `DepartmentResource`
-- Departments are referenced via foreign keys in the faculty table
-- Supports future extensions such as department heads or codes
+- Implemented using a Filament `SubjectResource`
+- Independent CRUD module with no direct dependencies
+- Supports use across multiple semesters
 
 ### Key Data Fields
-- Department name
+- Course code
+- Course title
+- Room
+- Schedule
 
 ### Technical Notes
-- Enforce unique department names to avoid duplication
-- Use select dropdowns when assigning departments to faculty
-- Index `department_id` for performance
+- Enforce unique course codes to prevent duplication
+- Schedule stored as text for MVP simplicity
+- Can be expanded later to structured scheduling if needed
 
 ---
 
-## Phase 1 Deliverables
-- Fully functional login and authentication system
-- Role-based user access implemented
-- Department CRUD interface available in admin panel
-- Foundation prepared for Faculty and Subject resources
+## Phase 2 Deliverables
+- Faculty CRUD interface with department association
+- Subject CRUD interface with complete course details
+- Relational data ready for faculty–subject assignment
 
 ---
 
-## Phase 1 Completion Criteria
-- Users can log in based on assigned roles
-- Registrar Head can manage user accounts
-- Departments can be created, updated, and deleted
-- Department data is available for relational use in Phase 2
+## Phase 2 Completion Criteria
+- Faculty members can be created, updated, and deleted
+- Faculty records are correctly linked to departments
+- Subjects can be managed independently
+- Data integrity enforced through foreign keys and validation
 
 ---
 
 ## Dependencies
-- Laravel framework
-- Filament Admin Panel
-- MySQL or PostgreSQL database
+- Completed Phase 1 (User & Department Management)
+- Database relationships enabled
 
 ---
 
 ## Next Phase
-**Phase 2: Core Academic Data Management**
-- Faculty Management
-- Subject Management
+**Phase 3: Faculty–Subject Assignment**
+- Teaching load management
+- Semester-based subject assignments
