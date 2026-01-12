@@ -28,11 +28,15 @@ class RegistrarPanelProvider extends PanelProvider
             ->id('registrar')
             ->path('registrar')
             ->login()
+            ->brandName('SPUP Grading System')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('4rem')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Green,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->breadcrumbs(false)
             ->pages([
                 Dashboard::class,
             ])

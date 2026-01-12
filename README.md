@@ -1,59 +1,90 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Grading Sheet Monitoring System (MVP)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Purpose
+A web-based system designed to help the Registrar’s Office efficiently monitor, track, and evaluate faculty grading sheet submissions per semester, ensuring compliance with academic deadlines.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## User Roles
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Registrar Head (Admin)
+- Full access to all system data, analytics, and reports
+- Sets grading sheet submission deadlines
+- Manages Registrar Officer accounts
+- Reviews compliance and generates official summaries
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Registrar Officer (Staff)
+- Encodes and updates grading sheet submission records
+- Monitors and validates faculty submissions
+- Views summaries to assist the Registrar Head
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Core Functionalities
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Authentication and User Management
+- Secure login using assigned user accounts
+- Role-based access control
+  - Registrar Head: full system access
+  - Registrar Officer: limited access
+- Registrar Head can:
+  - Add, edit, and delete officer accounts
+- Users can:
+  - Update passwords
+  - Manage basic profile information
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Faculty and Subject Management
+- Store and manage faculty information:
+  - Full name
+  - Employment type (Full-Time / Part-Time)
+  - Department
+  - Contact information
+- Assign subjects to faculty with the following details:
+  - Course code
+  - Course title
+  - Room
+  - Schedule
+  - Teaching load
+- Allows updating and deleting of faculty and subject records
+- Helps monitor faculty assignments and subject coverage per semester
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 3. Grading Sheet Tracking
+- Records grading sheet submission status per faculty, subject, and semester
+- Displays:
+  - Subject details
+  - Teacher name
+  - Submission date
+  - Submission status:
+    - Submitted
+    - Not Submitted
+    - Late
+- Organizes grading sheets by semester and subject for easy reference
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Deadline and Compliance Monitoring
+- Registrar Head sets submission deadlines per semester or subject
+- System automatically compares submission dates with deadlines
+- Submission status is categorized as:
+  - Submitted on Time
+  - Late Submission
+  - Not Yet Submitted
+- Enables quick identification of compliant and non-compliant faculty
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 5. Analytics Dashboard
+- Provides visual summaries for monitoring performance
+- Displays submission compliance rate:
+  - Percentage submitted on time
+  - Percentage submitted late
+  - Percentage not yet submitted
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## MVP Scope
+This MVP focuses on essential features for grading sheet tracking, deadline monitoring, and compliance reporting to support the Registrar’s Office operations.
