@@ -13,16 +13,14 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         $departments = [
-            'School of Information Technology and Engineering',
-            'School of Business, Accountancy, and Hospitality Management',
-            'School of Nursing and Allied Health Sciences',
-            'School of Arts Sciences and Teacher Education',
+            ['code' => 'SITE', 'name' => 'School of Information Technology and Engineering'],
+            ['code' => 'SBAHM', 'name' => 'School of Business, Accountancy, and Hospitality Management'],
+            ['code' => 'SNAHS', 'name' => 'School of Nursing and Allied Health Sciences'],
+            ['code' => 'SASTE', 'name' => 'School of Arts Sciences and Teacher Education'],
         ];
 
         foreach ($departments as $department) {
-            Department::create([
-                'name' => $department,
-            ]);
+            Department::create($department);
         }
     }
 }

@@ -14,7 +14,15 @@ class DepartmentsTable
     {
         return $table
             ->columns([
+                TextColumn::make('code')
+                    ->label('Code')
+                    ->searchable()
+                    ->sortable()
+                    ->badge()
+                    ->color('primary'),
+
                 TextColumn::make('name')
+                    ->label('Department Name')
                     ->searchable()
                     ->sortable(),
 

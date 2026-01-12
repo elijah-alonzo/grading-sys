@@ -34,10 +34,12 @@ class SectionsTable
                     ->badge()
                     ->color('info'),
 
-                TextColumn::make('department.name')
+                TextColumn::make('department.code')
                     ->label('Department')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->badge()
+                    ->color('success'),
 
                 TextColumn::make('created_at')
                     ->dateTime()
