@@ -52,7 +52,17 @@ class SectionsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                \Filament\Tables\Filters\SelectFilter::make('department')
+                    ->relationship('department', 'name')
+                    ->searchable()
+                    ->preload(),
+                \Filament\Tables\Filters\SelectFilter::make('year_level')
+                    ->options([
+                        '1' => '1st Year',
+                        '2' => '2nd Year',
+                        '3' => '3rd Year',
+                        '4' => '4th Year',
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

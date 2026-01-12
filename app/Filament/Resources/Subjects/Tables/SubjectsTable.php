@@ -60,7 +60,11 @@ class SubjectsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                \Filament\Tables\Filters\SelectFilter::make('type')
+                    ->options([
+                        'Major' => 'Major',
+                        'Minor' => 'Minor',
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

@@ -45,7 +45,11 @@ class UsersTable
                     ->sortable(),
             ])
             ->filters([
-                //
+                \Filament\Tables\Filters\SelectFilter::make('role')
+                    ->options([
+                        'head' => 'Registrar Head',
+                        'officer' => 'Registrar Officer',
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

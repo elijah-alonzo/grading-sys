@@ -1,94 +1,133 @@
-# Phase 2: Core Academic Data Management (MVP)
+v# Updated Phase 3: Teaching Load & Grading Sheet Assignment (MVP)
 
 ## Phase Overview
-Phase 2 focuses on managing the institution’s core academic data. This phase introduces faculty and subject records, which are essential for assigning teaching loads, tracking grading sheet submissions, and enforcing compliance in later phases.
+Phase 3 has been revised to better reflect real academic structures. This phase introduces **Sections** and refines **Subjects** as curriculum-based courses. A new central resource, **Teaching Load**, is used to assign faculty members to specific subjects and sections. This resource also serves as the primary entry point for grading sheet submission tracking.
 
 ---
 
 ## Objectives
-- Store and manage faculty information
-- Maintain accurate subject and course records
-- Establish academic data required for assignment and tracking
-- Prepare relationships for grading sheet monitoring
+- Model real-world academic structure using sections and subjects
+- Assign faculty members to subjects and sections per semester
+- Centralize teaching load and grading sheet submissions into one resource
+- Prepare a single source of truth for compliance and analytics
 
 ---
 
 ## Included Resources
-- Faculty Management
-- Subject Management
+- Section Management
+- Subject Management (Curriculum-based)
+- Teaching Load Management (Faculty–Subject–Section)
 
 ---
 
-## 1. Faculty Management
+## 1. Section Management
 
 ### Descriptive Overview
-Faculty Management maintains a centralized record of all teaching personnel. This module ensures that faculty members are properly categorized, assigned to departments, and available for subject assignment. Accurate faculty records are essential for reliable grading sheet tracking and compliance reporting.
+Sections represent all official class sections offered by the school (e.g., BSIT 4A, BSCS 2B). Each section belongs to a department and is used to group students under a specific academic program and year level. Sections are later used to accurately associate grading sheets with the correct class group.
 
 ### Technical Overview
-- Implemented using a Filament `FacultyResource`
-- Faculty records are linked to departments via a foreign key
-- Employment type stored as an enumerated field
-- Supports full CRUD operations
+- Implemented using a Filament `SectionResource`
+- Each section belongs to one department
+- Used as a required foreign key in Teaching Load assignments
 
 ### Key Data Fields
-- Full name
-- Employment type (Full-Time / Part-Time)
+- Section name
 - Department (foreign key reference)
-- Contact information
 
 ### Technical Notes
-- Department selection implemented using a relationship dropdown
-- Enforce required fields for data integrity
-- Index `department_id` for faster filtering and queries
-- Future-ready for faculty status or rank expansion
+- Enforce unique section names per department
+- Use relationship dropdowns for department selection
+- Index `department_id` for filtering and performance
 
 ---
 
-## 2. Subject Management
+## 2. Subject Management (Curriculum-Based)
 
 ### Descriptive Overview
-Subject Management handles all course-related data offered by the institution. It allows the Registrar to maintain accurate subject details such as schedules and room assignments, which are later used to associate faculty and track grading submissions.
+Subjects represent all courses defined in the institution’s curriculum. These are not tied to specific sections or faculty by default. Instead, they act as master records that can be reused across semesters, sections, and faculty assignments.
 
 ### Technical Overview
 - Implemented using a Filament `SubjectResource`
-- Independent CRUD module with no direct dependencies
-- Supports use across multiple semesters
+- Independent CRUD resource
+- Referenced by the Teaching Load resource
 
 ### Key Data Fields
 - Course code
 - Course title
-- Room
-- Schedule
+- (Optional) Units / description
 
 ### Technical Notes
-- Enforce unique course codes to prevent duplication
-- Schedule stored as text for MVP simplicity
-- Can be expanded later to structured scheduling if needed
+- Enforce unique course codes
+- Keep subjects independent of sections for flexibility
+- Future-ready for curriculum versioning
 
 ---
 
-## Phase 2 Deliverables
-- Faculty CRUD interface with department association
-- Subject CRUD interface with complete course details
-- Relational data ready for faculty–subject assignment
+## 3. Teaching Load Management (Core Resource)
+
+### Descriptive Overview
+The Teaching Load resource is the core operational module of the system. It assigns a faculty member to teach a specific subject for a specific section during a given semester. This same resource is also where grading sheet submissions are recorded and monitored.
+
+Each record represents a real-world teaching responsibility and acts as the single source of truth for compliance tracking.
+
+### Technical Overview
+- Implemented using a Filament `TeachingLoadResource`
+- Acts as a junction between:
+  - Faculty
+  - Subject
+  - Section
+- Stores grading sheet file submission data directly
+- Eliminates the need for a separate grading submission table
+
+### Key Data Fields
+- Faculty (foreign key reference)
+- Subject (foreign key reference)
+- Section (foreign key reference)
+- Semester
+- Teaching load
+- Submission date (nullable)
+- Submission status (`submitted`, `late`, `not_submitted`)
+
+### Technical Notes
+- Enforce unique combinations of:
+  - Faculty
+  - Subject
+  - Section
+  - Semester
+- Submission status can be:
+  - Manually set (MVP)
+  - Automatically computed in later phases using deadlines
+- Nullable submission date represents “Not Yet Submitted”
+- Index all foreign keys for performance
 
 ---
 
-## Phase 2 Completion Criteria
-- Faculty members can be created, updated, and deleted
-- Faculty records are correctly linked to departments
-- Subjects can be managed independently
-- Data integrity enforced through foreign keys and validation
+## Phase 3 Deliverables
+- Section CRUD interface linked to departments
+- Subject CRUD interface representing curriculum courses
+- Teaching Load CRUD interface with integrated grading submission tracking
+- Centralized data model for assignments and compliance
+
+---
+
+## Phase 3 Completion Criteria
+- Sections can be created and linked to departments
+- Subjects exist independently as curriculum records
+- Faculty can be assigned to subjects and sections per semester
+- Grading sheet submission data is recorded through Teaching Load
+- Duplicate teaching assignments are prevented
 
 ---
 
 ## Dependencies
-- Completed Phase 1 (User & Department Management)
-- Database relationships enabled
+- Completed Phase 2 (Faculty & Subject Foundations)
+- Departments properly configured
+- Faculty records finalized
 
 ---
 
 ## Next Phase
-**Phase 3: Faculty–Subject Assignment**
-- Teaching load management
-- Semester-based subject assignments
+**Phase 4: Deadline & Compliance Monitoring**
+- Submission deadlines per semester or subject
+- Automated late and on-time detection
+- Compliance summaries and analytics
