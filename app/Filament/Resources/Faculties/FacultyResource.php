@@ -23,7 +23,7 @@ class FacultyResource extends Resource
 
     protected static ?string $navigationLabel = 'Faculty';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Academic Management';
+    protected static UnitEnum|string|null $navigationGroup = 'User Management';
 
     public static function form(Schema $schema): Schema
     {

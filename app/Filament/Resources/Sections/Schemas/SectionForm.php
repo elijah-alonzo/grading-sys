@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Sections\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -33,6 +34,15 @@ class SectionForm
                             ->required()
                             ->maxLength(20)
                             ->placeholder('Enter year level (e.g., 1st Year, 2nd Year)'),
+
+                        Select::make('department_id')
+                            ->label('Department')
+                            ->prefixIcon('heroicon-o-building-office')
+                            ->required()
+                            ->relationship('department', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Select department'),
                     ])
                     ->columns(2),
             ]);

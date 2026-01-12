@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('code', 10); // BSN1
             $table->string('name'); // Bachelor of Science in Nursing
             $table->string('year_level', 20); // 1st Year, 2nd Year, etc.
+            $table->foreignId('department_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
             $table->unique(['code', 'year_level']);
+            $table->index('department_id');
         });
     }
 
