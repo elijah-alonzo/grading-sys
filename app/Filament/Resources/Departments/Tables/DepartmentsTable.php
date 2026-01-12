@@ -26,6 +26,20 @@ class DepartmentsTable
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('faculties_count')
+                    ->label('Faculties')
+                    ->counts('faculties')
+                    ->sortable()
+                    ->badge()
+                    ->color('info'),
+
+                TextColumn::make('sections_count')
+                    ->label('Sections')
+                    ->counts('sections')
+                    ->sortable()
+                    ->badge()
+                    ->color('success'),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
