@@ -23,38 +23,38 @@ class FacultySeeder extends Seeder
 
         $faculties = [
             [
-                'name' => 'Dr. Maria Santos',
+                'name' => 'Serafin Gazzingan',
                 'employment_type' => 'Full-Time',
                 'department_id' => $departments->random()->id,
-                'email' => 'maria.santos@university.edu',
+                'email' => 'serafin.gazzingan@spup.edu',
                 'phone' => '+63 917 123 4567',
             ],
             [
-                'name' => 'Prof. Juan dela Cruz',
+                'name' => 'Rheychelle Antonio',
                 'employment_type' => 'Full-Time',
                 'department_id' => $departments->random()->id,
-                'email' => 'juan.delacruz@university.edu',
+                'email' => 'rheychelle.antonio@spup.edu',
                 'phone' => '+63 917 234 5678',
             ],
             [
-                'name' => 'Ms. Anna Garcia',
+                'name' => 'Sheena Gumarang',
                 'employment_type' => 'Part-Time',
                 'department_id' => $departments->random()->id,
-                'email' => 'anna.garcia@university.edu',
+                'email' => 'sheena.gumarang@spup.edu',
                 'phone' => '+63 917 345 6789',
             ],
             [
-                'name' => 'Dr. Robert Johnson',
+                'name' => 'Dr. Marifel Kummer',
                 'employment_type' => 'Full-Time',
                 'department_id' => $departments->random()->id,
-                'email' => 'robert.johnson@university.edu',
+                'email' => 'marifel.kummer@spup.edu',
                 'phone' => '+63 917 456 7890',
             ],
             [
-                'name' => 'Prof. Lisa Chen',
+                'name' => 'Justin Tan',
                 'employment_type' => 'Part-Time',
                 'department_id' => $departments->random()->id,
-                'email' => 'lisa.chen@university.edu',
+                'email' => 'justin.tan@spup.edu',
                 'phone' => '+63 917 567 8901',
             ],
         ];

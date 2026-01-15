@@ -40,25 +40,25 @@ class SectionSeeder extends Seeder
             ],
             [
                 'code' => 'BSCS1',
-                'name' => 'Bachelor of Science in Computer Science',
+                'name' => 'Bachelor of Science in Information Technology',
                 'year_level' => '1st Year',
                 'department_id' => 2, // Assuming second department
             ],
             [
                 'code' => 'BSCS2',
-                'name' => 'Bachelor of Science in Computer Science',
+                'name' => 'Bachelor of Science in Information Technology',
                 'year_level' => '2nd Year',
                 'department_id' => 2,
             ],
             [
                 'code' => 'BSCS3',
-                'name' => 'Bachelor of Science in Computer Science',
+                'name' => 'Bachelor of Science in Information Technology',
                 'year_level' => '3rd Year',
                 'department_id' => 2,
             ],
             [
                 'code' => 'BSCS4',
-                'name' => 'Bachelor of Science in Computer Science',
+                'name' => 'Bachelor of Science in Information Technology',
                 'year_level' => '4th Year',
                 'department_id' => 2,
             ],

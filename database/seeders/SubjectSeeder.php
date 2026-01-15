@@ -33,10 +33,10 @@ class SubjectSeeder extends Seeder
                 'description' => 'Writing skills and composition techniques.',
             ],
             [
-                'name' => 'General Physics I',
+                'name' => 'Game Development',
                 'units' => 4,
                 'type' => 'Major',
-                'description' => 'Introduction to mechanics and thermodynamics.',
+                'description' => 'Introduction to game development concepts and techniques.',
             ],
             [
                 'name' => 'General Chemistry I',
