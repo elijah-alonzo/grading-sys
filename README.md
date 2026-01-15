@@ -1,3 +1,5 @@
-# NOTICE 
+<div align="center">
+    
+![grading-sys](public/images/logo.png)
 
-This project is currently under development. 
+</div>
