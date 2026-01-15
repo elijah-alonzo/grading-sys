@@ -5,8 +5,8 @@ namespace App\Filament\Resources\Loads\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
@@ -28,55 +28,40 @@ class LoadsTable
                 
                 TextColumn::make('subject.units')
                     ->label('Units')
-                    ->sortable(),
+                    ->sortable()
+                    ->alignCenter(),
                 
                 TextColumn::make('section.code')
-                    ->label('Section Code')
+                    ->label('Section')
                     ->sortable()
                     ->searchable(),
                 
-                TextColumn::make('section.name')
-                    ->label('Section Name')
-                    ->sortable()
-                    ->searchable(),
+                TextColumn::make('schedule')
+                    ->label('Schedule')
+                    ->limit(30)
+                    ->tooltip(function (TextColumn $column): ?string {
+                        $state = $column->getState();
+                        if (strlen($state) <= 30) {
+                            return null;
+                        }
+                        return $state;
+                    }),
                 
-                TextColumn::make('academic_year')
-                    ->label('Academic Year')
+                TextColumn::make('year')
+                    ->label('Year')
                     ->sortable(),
                 
                 TextColumn::make('semester')
                     ->label('Semester')
                     ->sortable(),
                 
-                TextColumn::make('schedule')
-                    ->label('Schedule')
-                    ->limit(50)
-                    ->tooltip(function (TextColumn $column): ?string {
-                        $state = $column->getState();
-                        if (strlen($state) <= 50) {
-                            return null;
-                        }
-                        return $state;
-                    }),
-                
-                BadgeColumn::make('status')
+                ToggleColumn::make('status')
                     ->label('Status')
-                    ->colors([
-                        'warning' => 'pending',
-                        'success' => 'grades_submitted',
-                        'primary' => 'completed',
-                    ])
-                    ->icons([
-                        'heroicon-o-clock' => 'pending',
-                        'heroicon-o-check-circle' => 'grades_submitted',
-                        'heroicon-o-check-badge' => 'completed',
-                    ]),
-                
-                TextColumn::make('created_at')
-                    ->label('Created')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->onIcon('heroicon-o-check-circle')
+                    ->offIcon('heroicon-o-x-circle')
+                    ->onColor('success')
+                    ->offColor('danger')
+                    ->sortable(),
             ])
             ->filters([
                 SelectFilter::make('semester')
@@ -88,15 +73,14 @@ class LoadsTable
                 
                 SelectFilter::make('status')
                     ->options([
-                        'pending' => 'Pending',
-                        'grades_submitted' => 'Grades Submitted',
-                        'completed' => 'Completed',
+                        '1' => 'Submitted',
+                        '0' => 'Not Submitted',
                     ]),
                 
-                SelectFilter::make('academic_year')
+                SelectFilter::make('year')
                     ->options(function () {
-                        return \App\Models\Load::distinct('academic_year')
-                            ->pluck('academic_year', 'academic_year')
+                        return \App\Models\Load::distinct('year')
+                            ->pluck('year', 'year')
                             ->toArray();
                     }),
             ])

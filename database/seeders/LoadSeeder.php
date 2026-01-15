@@ -24,19 +24,19 @@ class LoadSeeder extends Seeder
                     'faculty_id' => $faculties->first()->id,
                     'subject_id' => $subjects->first()->id,
                     'section_id' => $sections->first()->id,
-                    'academic_year' => '2025-2026',
+                    'year' => '2025-2026',
                     'semester' => '1st Semester',
                     'schedule' => 'MWF 8:00-9:00 AM, Room 101',
-                    'status' => 'pending',
+                    'status' => false,
                 ],
                 [
                     'faculty_id' => $faculties->first()->id,
                     'subject_id' => $subjects->skip(1)->first()?->id ?? $subjects->first()->id,
                     'section_id' => $sections->skip(1)->first()?->id ?? $sections->first()->id,
-                    'academic_year' => '2025-2026',
+                    'year' => '2025-2026',
                     'semester' => '1st Semester',
                     'schedule' => 'TTH 10:00-11:30 AM, Room 102',
-                    'status' => 'grades_submitted',
+                    'status' => true,
                 ],
             ];
 

@@ -11,7 +11,7 @@ class Load extends Model
         'faculty_id',
         'subject_id',
         'section_id',
-        'academic_year',
+        'year',
         'semester',
         'schedule',
         'status',
@@ -19,7 +19,7 @@ class Load extends Model
 
     protected $casts = [
         'semester' => 'string',
-        'status' => 'string',
+        'status' => 'boolean',
     ];
 
     public function faculty(): BelongsTo

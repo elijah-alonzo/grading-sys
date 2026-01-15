@@ -58,8 +58,8 @@ class LoadForm
                     ->description('Set the academic period and class schedule information')
                     ->columnSpanFull()
                     ->schema([
-                        TextInput::make('academic_year')
-                            ->label('Academic Year')
+                        TextInput::make('year')
+                            ->label('Year')
                             ->prefixIcon('heroicon-o-calendar-days')
                             ->placeholder('e.g., 2025-2026')
                             ->required()
@@ -83,24 +83,6 @@ class LoadForm
                             ->columnSpanFull(),
                     ])
                     ->columns(2),
-                
-                FormSection::make('Status Management')
-                    ->description('Monitor the progress of grade submission for this load')
-                    ->columnSpanFull()
-                    ->schema([
-                        Select::make('status')
-                            ->label('Status')
-                            ->prefixIcon('heroicon-o-flag')
-                            ->options([
-                                'pending' => 'Pending',
-                                'grades_submitted' => 'Grades Submitted',
-                                'completed' => 'Completed',
-                            ])
-                            ->default('pending')
-                            ->required()
-                            ->placeholder('Select status'),
-                    ])
-                    ->columns(1),
             ]);
     }
 }
