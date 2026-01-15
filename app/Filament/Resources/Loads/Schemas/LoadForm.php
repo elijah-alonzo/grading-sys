@@ -8,6 +8,7 @@ use App\Models\Subject;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section as FormSection;
 use Filament\Schemas\Schema;
 
 class LoadForm
@@ -16,56 +17,90 @@ class LoadForm
     {
         return $schema
             ->components([
-                Select::make('faculty_id')
-                    ->label('Faculty')
-                    ->options(Faculty::all()->pluck('name', 'id'))
-                    ->searchable()
-                    ->required(),
-                
-                Select::make('subject_id')
-                    ->label('Subject')
-                    ->options(Subject::all()->mapWithKeys(function ($subject) {
-                        return [$subject->id => $subject->name . ' (' . $subject->units . ' units)'];
-                    }))
-                    ->searchable()
-                    ->required(),
-                
-                Select::make('section_id')
-                    ->label('Section')
-                    ->options(Section::all()->mapWithKeys(function ($section) {
-                        return [$section->id => $section->code . ' - ' . $section->name];
-                    }))
-                    ->searchable()
-                    ->required(),
-                
-                TextInput::make('academic_year')
-                    ->label('Academic Year')
-                    ->placeholder('e.g., 2025-2026')
-                    ->required(),
-                
-                Select::make('semester')
-                    ->label('Semester')
-                    ->options([
-                        '1st Semester' => '1st Semester',
-                        '2nd Semester' => '2nd Semester',
-                        'Summer' => 'Summer',
+                FormSection::make('Teaching Load Assignment')
+                    ->description('Assign faculty members to teach subjects for specific sections')
+                    ->columnSpanFull()
+                    ->schema([
+                        Select::make('faculty_id')
+                            ->label('Faculty')
+                            ->prefixIcon('heroicon-o-user')
+                            ->options(Faculty::all()->pluck('name', 'id'))
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->placeholder('Select faculty member'),
+                        
+                        Select::make('subject_id')
+                            ->label('Subject')
+                            ->prefixIcon('heroicon-o-book-open')
+                            ->options(Subject::all()->mapWithKeys(function ($subject) {
+                                return [$subject->id => $subject->name . ' (' . $subject->units . ' units)'];
+                            }))
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->placeholder('Select subject'),
+                        
+                        Select::make('section_id')
+                            ->label('Section')
+                            ->prefixIcon('heroicon-o-academic-cap')
+                            ->options(Section::all()->mapWithKeys(function ($section) {
+                                return [$section->id => $section->code . ' - ' . $section->name];
+                            }))
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->placeholder('Select section'),
                     ])
-                    ->required(),
+                    ->columns(3),
                 
-                Textarea::make('schedule')
-                    ->label('Schedule')
-                    ->placeholder('e.g., MWF 8:00-9:00 AM, Room 101')
-                    ->rows(3),
-                
-                Select::make('status')
-                    ->label('Status')
-                    ->options([
-                        'pending' => 'Pending',
-                        'grades_submitted' => 'Grades Submitted',
-                        'completed' => 'Completed',
+                FormSection::make('Schedule & Academic Details')
+                    ->description('Set the academic period and class schedule information')
+                    ->columnSpanFull()
+                    ->schema([
+                        TextInput::make('academic_year')
+                            ->label('Academic Year')
+                            ->prefixIcon('heroicon-o-calendar-days')
+                            ->placeholder('e.g., 2025-2026')
+                            ->required()
+                            ->maxLength(20),
+                        
+                        Select::make('semester')
+                            ->label('Semester')
+                            ->prefixIcon('heroicon-o-calendar')
+                            ->options([
+                                '1st Semester' => '1st Semester',
+                                '2nd Semester' => '2nd Semester',
+                                'Summer' => 'Summer',
+                            ])
+                            ->required()
+                            ->placeholder('Select semester'),
+                        
+                        Textarea::make('schedule')
+                            ->label('Schedule')
+                            ->placeholder('e.g., MWF 8:00-9:00 AM, Room 101\nTTH 2:00-3:30 PM, Lab 201')
+                            ->rows(3)
+                            ->columnSpanFull(),
                     ])
-                    ->default('pending')
-                    ->required(),
+                    ->columns(2),
+                
+                FormSection::make('Status Management')
+                    ->description('Monitor the progress of grade submission for this load')
+                    ->columnSpanFull()
+                    ->schema([
+                        Select::make('status')
+                            ->label('Status')
+                            ->prefixIcon('heroicon-o-flag')
+                            ->options([
+                                'pending' => 'Pending',
+                                'grades_submitted' => 'Grades Submitted',
+                                'completed' => 'Completed',
+                            ])
+                            ->default('pending')
+                            ->required()
+                            ->placeholder('Select status'),
+                    ])
+                    ->columns(1),
             ]);
     }
 }
