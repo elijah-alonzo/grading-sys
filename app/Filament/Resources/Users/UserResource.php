@@ -14,6 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
@@ -25,14 +26,15 @@ class UserResource extends Resource
 
     protected static UnitEnum|string|null $navigationGroup = 'User Management';
 
-    public static function canViewAny(): bool
-    {
-        return auth()->user()?->isHead() ?? false;
-    }
-
     public static function form(Schema $schema): Schema
     {
         return UserForm::configure($schema);
+    }
+
+    public static function canAccess(): bool
+    {
+        $user = Auth::user();
+        return $user && $user->role === 'head';
     }
 
     public static function table(Table $table): Table
